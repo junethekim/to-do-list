@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./main.css";
 import CreateToDo from "./components/CreateToDo.js";
 import Task from "./components/Task.js";
@@ -10,13 +10,27 @@ function App() {
     var tasks = JSON.parse(sessionStorage.getItem("task"));
 
     if (sessionStorage.getItem("task") != null) {
-      const display = tasks.map((task, id) => (
+      //get Tasks to complete
+      const tasksToComplete = tasks.filter(
+        ({ complete }) => complete === false
+      );
+      //display tasks to complete
+      const taskListToComplete = tasksToComplete.map((task, id) => (
+        <Task label={task.label} complete={task.complete} key={id} />
+      ));
+
+      //get complete tasks
+      const completedTasks = tasks.filter(({ complete }) => complete === true);
+      //display complete tasks
+      const completedTaskList = completedTasks.map((task, id) => (
         <Task label={task.label} complete={task.complete} key={id} />
       ));
       return (
         <div className="tasklist">
-          <h2>Tasks</h2>
-          {display}
+          <h2>Tasks to complete</h2>
+          {taskListToComplete}
+          <h2>Completed</h2>
+          {completedTaskList}
         </div>
       );
     } else {
