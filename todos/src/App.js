@@ -1,67 +1,40 @@
 import React from "react";
-import "./App.css";
-// import ToDoField from "./components/ToDoField.js";
+import "./main.css";
+import CreateToDo from "./components/CreateToDo.js";
+import Task from "./components/Task.js";
 
 function App() {
-  class ToDoForm extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = { value: "" };
+  //To do list
+  //투두리스트 보여주기
+  function ToDoList() {
+    var tasks = JSON.parse(sessionStorage.getItem("task"));
 
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleChange(event) {
-      this.setState({ value: event.target.value });
-    }
-
-    handleSubmit(event) {
-      alert("A name was submitted: " + this.state.value);
-      event.preventDefault();
-    }
-
-    render() {
+    if (sessionStorage.getItem("task") != null) {
+      const display = tasks.map((task, id) => (
+        <Task label={task.label} complete={task.complete} key={id} />
+      ));
       return (
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Add your task
-            <input
-              type="text"
-              value={this.state.value}
-              onChange={this.handleChange}
-            />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+        <div className="tasklist">
+          <h2>Tasks</h2>
+          {display}
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <h2>Tasks</h2>
+        </div>
       );
     }
   }
 
-  // Show To Do List
-  function ToDoList(props) {
-    const todos = [
-      { id: 1, complete: true, value: "cleaning" },
-      { id: 2, complete: false, value: "work" },
-    ];
-
-    // To Do Item
-    const todolist = todos.map((todo) => (
-      <li key={todo.id}>
-        {todo.value}, {todo.complete.toString()}
-      </li>
-    ));
-    return (
-      <div>
-        <ul>{todolist}</ul>
-      </div>
-    );
-  }
-
+  //Complete task
   return (
     <div className="App">
-      <ToDoForm />
-      <ToDoList />
+      <div className="container">
+        <CreateToDo />
+        <ToDoList />
+      </div>
     </div>
   );
 }
