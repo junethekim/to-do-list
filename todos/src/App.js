@@ -36,7 +36,7 @@ function App() {
     } else {
       return (
         <div>
-          <h2>Tasks</h2>
+          <h2>No tasks found.</h2>
         </div>
       );
     }
