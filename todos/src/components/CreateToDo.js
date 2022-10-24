@@ -4,7 +4,7 @@ class CreateToDo extends React.Component {
   constructor(props) {
     super(props);
     // Boolean instead of text
-    this.state = { value: "", complete: Boolean(false), id: Number };
+    this.state = { value: "", complete: Boolean(false), index: Number };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -14,22 +14,30 @@ class CreateToDo extends React.Component {
   }
 
   handleSubmit(event) {
-    // alert("A name was submitted: " + this.state.value);
+    var taskList = [];
+    taskList = JSON.parse(sessionStorage.getItem("task"));
+    const labelCheck = taskList.some((i) => i.label === this.state.value);
+    if (labelCheck === true) {
+      event.preventDefault();
+      alert("A task with same label exists.");
+      return;
+    }
 
     var task = {
       label: this.state.value,
       complete: this.state.complete,
-      id: this.props.id,
+      index: 0,
     };
+
     if (sessionStorage.getItem("task") != null) {
-      var taskList = JSON.parse(sessionStorage.getItem("task"));
+      task.index = taskList.length;
       taskList.push(task);
       sessionStorage.setItem("task", JSON.stringify(taskList));
+      console.log(labelCheck, task.label);
     } else {
-      sessionStorage.setItem("task", JSON.stringify([task]));
+      taskList.push(task);
+      sessionStorage.setItem("task", JSON.stringify(taskList));
     }
-    // event.preventDefault();
-
     // sessionStorage.setItem("task", JSON.stringify([this.state.value]));
   }
 
