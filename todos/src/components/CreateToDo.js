@@ -22,13 +22,22 @@ class CreateToDo extends React.Component {
       index: 0,
     };
 
+    if (!task.label) {
+      event.preventDefault();
+      alert("Please type task label.");
+      return;
+    }
+
     if (taskList != null) {
       const labelCheck = taskList.some((i) => i.label === this.state.value);
+
+
       if (labelCheck === true) {
         event.preventDefault();
         alert("A task with same label exists.");
         return;
       }
+
       task.index = taskList.length;
       taskList.push(task);
       sessionStorage.setItem("task", JSON.stringify(taskList));
