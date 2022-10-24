@@ -1,24 +1,39 @@
 import React, { useEffect } from "react";
 
-function Task {
-  const handleClick() => {
-    var taskList = JSON.parse(sessionStorage.getItem("task"));
+function Task(props) {
+  // const [complete, setComplete] = useState(props.complete);
+  var taskList = JSON.parse(sessionStorage.getItem("task"));
+  //change cliecked task object
 
+  const toggleTask = () => {
     //get clicked task name
     const clickedTask = taskList.find(
-      ({ label }) => label === this.props.label
+      ({ index, label }) => label === props.label
     );
-    //change cliecked task object
-    this.setState({ complete: !this.props.complete });
+    var task = {
+      label: props.label,
+      complete: !clickedTask.complete,
+      index: clickedTask.index,
+    };
+    taskList.splice(clickedTask.index, 1, task);
+    sessionStorage.setItem("task", JSON.stringify(taskList));
 
-    console.log(!this.props.complete, this.props.label, clickedTask.label);
-  }
+    console.log(clickedTask.index);
+  };
+
+  const handleClick = (event) => {
+    toggleTask();
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    console.log();
+  });
 
   return (
-    <div className="task" onClick={this.handleClick} key={this.props.id}>
-      <div className={"checkbox " + String(this.props.complete)}></div>
-      <div className="task-name">{this.props.label}</div>
-      is {String(this.props.complete)}
+    <div className="task" onClick={handleClick} key={props.index}>
+      <div className={"checkbox " + String(props.complete)}></div>
+      <div className="task-name">{props.label}</div>
     </div>
   );
 }
