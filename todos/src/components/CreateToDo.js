@@ -14,14 +14,7 @@ class CreateToDo extends React.Component {
   }
 
   handleSubmit(event) {
-    var taskList = [];
-    taskList = JSON.parse(sessionStorage.getItem("task"));
-    const labelCheck = taskList.some((i) => i.label === this.state.value);
-    if (labelCheck === true) {
-      event.preventDefault();
-      alert("A task with same label exists.");
-      return;
-    }
+    var taskList = JSON.parse(sessionStorage.getItem("task"));
 
     var task = {
       label: this.state.value,
@@ -29,12 +22,19 @@ class CreateToDo extends React.Component {
       index: 0,
     };
 
-    if (sessionStorage.getItem("task") != null) {
+    if (taskList != null) {
+      const labelCheck = taskList.some((i) => i.label === this.state.value);
+      if (labelCheck === true) {
+        event.preventDefault();
+        alert("A task with same label exists.");
+        return;
+      }
       task.index = taskList.length;
       taskList.push(task);
       sessionStorage.setItem("task", JSON.stringify(taskList));
       console.log(labelCheck, task.label);
     } else {
+      taskList = [];
       taskList.push(task);
       sessionStorage.setItem("task", JSON.stringify(taskList));
     }
