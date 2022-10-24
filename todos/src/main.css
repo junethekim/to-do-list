@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap");
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  font-weight: 400;
+  font-family: "Roboto Mono", monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-weight: 700;
+}
+
+form {
+  margin-bottom: 2rem;
+}
+
+input {
+  transition: 0.2s ease;
+}
+
+input[type="text"] {
+  font-family: "Roboto Mono", monospace;
+  background-color: white;
+  border: 1px solid black;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.75rem;
+  border-radius: 0.125rem;
+  margin-right: 0.5rem;
+  outline: none;
+}
+
+input[type="text"]:hover {
+  border: 1px solid #2932ff;
+}
+
+input[type="text"]:focus {
+  border: 1px solid #2932ff;
+  box-shadow: 0px 4px 4px 0px rgba(41, 50, 255, 0.16);
+}
+
+input[type="submit"] {
+  font-family: "Roboto Mono", monospace;
+  background-color: white;
+  border: 1px solid transparent;
+  font-size: 0.8rem;
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  border-radius: 0.125rem;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  color: #2932ff;
+  background: rgba(41, 50, 255, 0.16);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 20rem;
+  margin: auto;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.125rem;
+  transition: 0.2s ease;
+}
+
+.task:hover {
+  background: rgba(41, 50, 255, 0.08);
+  cursor: pointer;
+  box-shadow: 0px 2px 2px 0px rgba(41, 50, 255, 0.16);
+}
+
+.tasklist {
+  display: flex;
+  flex-direction: column;
+  /* gap: 0.5rem; */
+}
+
+.checkbox {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid black;
+  background: white;
+  display: inline-block;
+}
+
+.checkbox.true {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid black;
+  background: black;
+  display: inline-block;
+}
