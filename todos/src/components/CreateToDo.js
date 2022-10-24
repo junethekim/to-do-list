@@ -31,6 +31,7 @@ class CreateToDo extends React.Component {
     if (taskList != null) {
       const labelCheck = taskList.some((i) => i.label === this.state.value);
 
+
       if (labelCheck === true) {
         event.preventDefault();
         alert("A task with same label exists.");
